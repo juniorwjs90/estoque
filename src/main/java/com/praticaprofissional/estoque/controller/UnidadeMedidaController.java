@@ -23,4 +23,5 @@ public class UnidadeMedidaController {
     public List<UnidadeMedida> consultarUnidadeMedida(){
         return service.listarUnidadeMedida();
     }
+
 }
