@@ -29,6 +29,7 @@ public class UnidadeMedidaService {
         Optional<UnidadeMedida> unidadeMedidadParaEditar = buscarPorId(unidadeMedidaId);
         if (unidadeMedidadParaEditar.isPresent()){
             unidadeMedidaEditar.setId(unidadeMedidaId);
+            return repository.save(unidadeMedidaEditar);
         }
         return null;
     }
