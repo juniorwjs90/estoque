@@ -27,7 +27,7 @@ public class UnidadeMedidaController {
 
     @GetMapping("/{id}")
     public Optional<UnidadeMedida> buscarUnidadeMedidaPorId(@PathVariable(name = "id") Long unidadeMedidaId){
-        return service.buscarPorId(unidadeMedidaId);
+        return service.buscarUnidadeMedidaPorId(unidadeMedidaId);
     }
 
     @PutMapping("/{id}")
