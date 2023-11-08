@@ -12,7 +12,7 @@ public class Produto {
     private long id;
     private long codigo;
     private String nome;
-    private long valor;
+    private float valor;
     private String tipo_unidade;
     private long quantidade;
 
@@ -40,11 +40,11 @@ public class Produto {
         this.nome = nome;
     }
 
-    public long getValor() {
+    public float getValor() {
         return valor;
     }
 
-    public void setValor(long valor) {
+    public void setValor(float valor) {
         this.valor = valor;
     }
 
