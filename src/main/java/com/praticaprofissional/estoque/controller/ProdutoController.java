@@ -14,6 +14,7 @@ public class ProdutoController {
 
     private final ProdutoService service;
 
+    @CrossOrigin(origins = "*")
     @PostMapping
     public Produto salvar(@RequestBody Produto addProduto){
         return service.adicionarProduto(addProduto);
