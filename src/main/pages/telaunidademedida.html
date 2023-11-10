@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Formulário Unidade de Medida</title>
+    <!-- Adicione links para os arquivos CSS e JavaScript do Bootstrap -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <h2>Formulário Unidade de Medida</h2>
+        <form id="unidadeMedidaForm">
+            <div class="form-group">
+                <label for="unidade">Unidade:</label>
+                <input type="text" class="form-control" id="unidade" name="unidade">
+            </div>
+            <div class="form-group">
+                <label for="sigla">Sigla:</label>
+                <input type="text" class="form-control" id="sigla" name="sigla">
+            </div>
+            <div class="form-group">
+                <label for="fator_conversao">Fator de Conversão:</label>
+                <input type="number" class="form-control" id="fator_conversao" name="fator_conversao">
+            </div>
+            <button type="button" class="btn btn-primary" id="adicionar">Adicionar</button>
+        </form>
+        <br>
+        <h2>Lista de Unidades de Medida</h2>
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Unidade</th>
+                    <th>Sigla</th>
+                    <th>Fator de Conversão</th>
+                    <th>Ações</th>
+                </tr>
+            </thead>
+            <tbody id="unidadeMedidaList">
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Modal de Sucesso -->
+    <div class="modal fade" id="modalSucesso" tabindex="-1" role="dialog" aria-labelledby="modalSucessoLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalSucessoLabel">Sucesso</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    Operação realizada com sucesso!
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-dismiss="modal">Fechar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal de Erro -->
+    <div class="modal fade" id="modalErro" tabindex="-1" role="dialog" aria-labelledby="modalErroLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalErroLabel">Erro</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    Ocorreu um erro durante a operação.
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Fechar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Função para carregar a lista de unidades de medida
+        function carregarUnidadesMedida() {
+            $.get("http://localhost:8080/unidademedida", function(data) {
+                $("#unidadeMedidaList").empty();
+                data.forEach(function(unidade) {
+                    $("#unidadeMedidaList").append(`
+                        <tr>
+                            <td>${unidade.id}</td>
+                            <td>${unidade.unidade}</td>
+                            <td>${unidade.sigla}</td>
+                            <td>${unidade.fator_conversao}</td>
+                            <td>
+                                <button class="btn btn-warning" onclick="editarUnidade(${unidade.id})">Editar</button>
+                                <button class="btn btn-danger" onclick="apagarUnidade(${unidade.id})">Apagar</button>
+                            </td>
+                        </tr>
+                    `);
+                });
+            });
+        }
+
+        // Função para adicionar uma unidade de medida
+        $("#adicionar").click(function() {
+            $.post("/unidademedida", $("#unidadeMedidaForm").serialize(), function(data) {
+                if (data.status === "success") {
+                    carregarUnidadesMedida();
+                    $("#unidadeMedidaForm")[0].reset();
+                    $("#modalSucesso").modal("show");
+                } else {
+                    $("#modalErro").modal("show");
+                }
+            });
+        });
+
+        // Função para editar uma unidade de medida
+        function editarUnidade(id) {
+            $.get(`http://localhost:8080/unidademedida/${id}`, function(data) {
+                $("#unidade").val(data.unidade);
+                $("#sigla").val(data.sigla);
+                $("#fator_conversao").val(data.fator_conversao);
+                $("#adicionar").prop("disabled", true);
+                $("#adicionar").off("click");
+                $("#adicionar").click(function() {
+                    $.ajax({
+                        url: `http://localhost:8080/unidademedida/${id}`,
+                        type: "PUT",
+                        data: $("#unidadeMedidaForm").serialize(),
+                        success: function(data) {
+                            if (data.status === "success") {
+                                carregarUnidadesMedida();
+                                $("#unidadeMedidaForm")[0].reset();
+                                $("#adicionar").prop("disabled", false);
+                                $("#adicionar").off("click");
+                                $("#adicionar").click(function() {
+                                    $.post("http://localhost:8080/unidademedida", $("#unidadeMedidaForm").serialize(), function(data) {
+                                        if (data.status === "success") {
+                                            carregarUnidadesMedida();
+                                            $("#unidadeMedidaForm")[0].reset();
+                                            $("#modalSucesso").modal("show");
+                                        } else {
+                                            $("#modalErro").modal("show");
+                                        }
+                                    });
+                                });
+                            } else {
+                                $("#modalErro").modal("show");
+                            }
+                        },
+                        error: function() {
+                            $("#modalErro").modal("show");
+                        }
+                    });
+                });
+            });
+        }
+
+        // Função para apagar uma unidade de medida
+        function apagarUnidade(id) {
+            if (confirm("Tem certeza de que deseja apagar esta unidade de medida?")) {
+                $.ajax({
+                    url: `http://localhost:8080/unidademedida/${id}`,
+                    type: "DELETE",
+                    success: function(data) {
+                        if (data.status === "success") {
+                            carregarUnidadesMedida();
+                        } else {
+                            $("#modalErro").modal("show");
+                        }
+                    },
+                    error: function() {
+                        $("#modalErro").modal("show");
+                    }
+                });
+            }
+        }
+
+        // Carregando a lista de unidades de medida quando a página é carregada
+        $(document).ready(function() {
+            carregarUnidadesMedida();
+        });
+    </script>
+</body>
+</html>

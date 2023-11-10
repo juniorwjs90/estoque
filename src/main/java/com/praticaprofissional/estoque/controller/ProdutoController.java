@@ -15,7 +15,6 @@ public class ProdutoController {
     private final ProdutoService service;
 
     @CrossOrigin(origins = "*")
-    @PostMapping
     public Produto salvar(@RequestBody Produto addProduto){
         return service.adicionarProduto(addProduto);
     }
@@ -28,6 +27,7 @@ public class ProdutoController {
     public Produto editarProduto(@PathVariable(name = "id") Long produtoId, @RequestBody Produto produtoParaEditar){
         return service.editarProduto(produtoId, produtoParaEditar);
     }
+
     @DeleteMapping("/{id}")
     public String apagarProdutoPorId(@PathVariable(name = "id") Long produtoId){
         return service.apagarProduto(produtoId);
