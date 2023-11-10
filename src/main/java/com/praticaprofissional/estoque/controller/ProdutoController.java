@@ -5,6 +5,7 @@ import com.praticaprofissional.estoque.service.ProdutoService;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Optional;
 
 @RestController
@@ -19,10 +20,17 @@ public class ProdutoController {
         return service.adicionarProduto(addProduto);
     }
 
+    @CrossOrigin(origins = "*")
+    @GetMapping
+    public List<Produto> consultarProduto(){
+        return service.listarProduto();
+    }
+
     @GetMapping("/{id}")
     public Optional<Produto> buscarProdutoPorId(@PathVariable(name = "id") Long produtoId){
         return service.buscarProdutoPorId(produtoId);
     }
+
     @PutMapping("/{id}")
     public Produto editarProduto(@PathVariable(name = "id") Long produtoId, @RequestBody Produto produtoParaEditar){
         return service.editarProduto(produtoId, produtoParaEditar);
