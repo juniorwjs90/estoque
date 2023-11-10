@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Inserir Produto</title>
+    <!-- Inclua os estilos do Bootstrap -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Inserir Produto</h1>
+        <form id="produto-form">
+            <div class="form-group">
+                <label for="codigo">Código:</label>
+                <!-- Você pode remover o campo de código se for auto incremento -->
+                <input type="text" class="form-control" id="codigo" name="codigo">
+            </div>
+            <div class="form-group">
+                <label for="nome">Nome:</label>
+                <input type="text" class="form-control" id="nome" name="nome" required>
+            </div>
+            <div class="form-group">
+                <label for="valor">Valor:</label>
+                <input type="text" class="form-control" id="valor" name="valor" required>
+            </div>
+            <div class="form-group">
+                <label for="tipo_unidade">Tipo de Unidade:</label>
+                <input type="text" class="form-control" id="tipo_unidade" name="tipo_unidade" required>
+            </div>
+            <div class="form-group">
+                <label for="quantidade">Quantidade:</label>
+                <input type="text" class="form-control" id="quantidade" name="quantidade" required>
+            </div>
+            <button type="submit" class="btn btn-primary">Adicionar Produto</button>
+        </form>
+        <br>
+        <h2>Lista de Produtos</h2>
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>Código</th>
+                    <th>Nome</th>
+                    <th>Valor</th>
+                    <th>Tipo de unidade</th>
+                    <th>Quantidade</th>
+                </tr>
+            </thead>
+            <tbody id="produtoList">
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Inclua o jQuery (ou outra biblioteca AJAX) -->
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+
+    <script>
+        // Função para carregar a lista de unidades de medida
+        function carregarProdutos() {
+            $.get("http://localhost:8080/produto", function(data) {
+                $("#produtoList").empty();
+                    data.forEach(function(produto) {
+                        $("#produtoList").append(`
+                            <tr>
+                                <td>${produto.codigo}</td>
+                                <td>${produto.nome}</td>
+                                <td>${produto.valor}</td>
+                                <td>${produto.tipo_unidade}</td>
+                                <td>${produto.quantidade}</td>
+                            </tr>
+                       `);
+                });
+            });
+        }
+        // Manipule o envio do formulário
+        $(document).ready(function() {
+            $("#produto-form").submit(function(event) {
+                event.preventDefault(); // Impede o envio padrão do formulário
+                var novoProduto = {
+                    nome: $("#nome").val(),
+                    valor: $("#valor").val(),
+                    tipo_unidade: $("#tipo_unidade").val(),
+                    quantidade: $("#quantidade").val()
+                };
+
+                $.ajax({
+                    type: "POST",
+                    url: "http://localhost:8080/produto",
+                    data: JSON.stringify(novoProduto),
+                    contentType: "application/json",
+                    success: function() {
+                        // Redirecione para a página de lista de produtos após a adição bem-sucedida
+                        alert("Dados inseridos com sucesso !!!");
+                    },
+                    error: function(xhr, status, error) {
+                        alert("Erro ao adicionar o produto: " + error);
+                    }
+                });
+            });
+        });
+        // Carregando a lista de produtos quando a página é carregada
+        $(document).ready(function() {
+            carregarProdutos();
+            });
+    </script>
+</body>
+</html>
