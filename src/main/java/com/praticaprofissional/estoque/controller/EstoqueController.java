@@ -2,7 +2,6 @@ package com.praticaprofissional.estoque.controller;
 
 import com.praticaprofissional.estoque.model.Estoque;
 import com.praticaprofissional.estoque.service.EstoqueService;
-import com.praticaprofissional.estoque.service.MetodoPagamentoService;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
