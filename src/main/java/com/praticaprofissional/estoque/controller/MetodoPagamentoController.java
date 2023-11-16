@@ -38,6 +38,7 @@ public class MetodoPagamentoController {
         return service.editarMetodoPagamento(metodoPagamentoId, metodoPagamentoParaEditar);
     }
 
+    @CrossOrigin(origins = "*")
     @DeleteMapping("/{id}")
     public String apagarMetodoPagamento(@PathVariable(name = "id") Long metodoPagamentoId){
         return service.apagarMetodoPagamento(metodoPagamentoId);
