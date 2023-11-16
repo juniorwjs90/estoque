@@ -27,16 +27,19 @@ public class ProdutoController {
         return service.listarProduto();
     }
 
+    @CrossOrigin(origins = "*")
     @GetMapping("/{id}")
     public Optional<Produto> buscarProdutoPorId(@PathVariable(name = "id") Long produtoId){
         return service.buscarProdutoPorId(produtoId);
     }
 
+    @CrossOrigin(origins = "*")
     @PutMapping("/{id}")
     public Produto editarProduto(@PathVariable(name = "id") Long produtoId, @RequestBody Produto produtoParaEditar){
         return service.editarProduto(produtoId, produtoParaEditar);
     }
 
+    @CrossOrigin(origins = "*")
     @DeleteMapping("/{id}")
     public String apagarProdutoPorId(@PathVariable(name = "id") Long produtoId){
         return service.apagarProduto(produtoId);
