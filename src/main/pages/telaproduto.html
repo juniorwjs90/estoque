@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<meta charset="UTF-8">
 <html>
 <head>
     <title>Inserir Produto</title>
@@ -12,7 +13,7 @@
             <div class="form-group">
                 <label for="codigo">Código:</label>
                 <!-- Você pode remover o campo de código se for auto incremento -->
-                <input type="text" class="form-control" id="codigo" name="codigo">
+                <input type="text" class="form-control" id="codigo" name="codigo" required>
             </div>
             <div class="form-group">
                 <label for="nome">Nome:</label>
@@ -75,6 +76,7 @@
             $("#produto-form").submit(function(event) {
                 event.preventDefault(); // Impede o envio padrão do formulário
                 var novoProduto = {
+                    codigo: $("#codigo").val(),
                     nome: $("#nome").val(),
                     valor: $("#valor").val(),
                     tipo_unidade: $("#tipo_unidade").val(),
