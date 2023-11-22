@@ -42,6 +42,6 @@ public class ClienteController {
     @CrossOrigin(origins = "*")
     @DeleteMapping("/{id}")
     public String apagarClientePorId(@PathVariable(name = "id") Long clienteId){
-        return service.apagarCliente(clienteId)
+        return service.apagarCliente(clienteId);
     }
 }
