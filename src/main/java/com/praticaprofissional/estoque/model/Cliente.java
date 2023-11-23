@@ -14,9 +14,9 @@ public class Cliente {
     private String nome;
     private String email;
     private String cep;
-    private int numero;
-    private int numero_telefone_fixo;
-    private int numero_telefone_celular;
+    private long numero;
+    private String numero_telefone_fixo;
+    private String numero_telefone_celular;
     private String endereco;
     private String bairro;
     private String estado;
@@ -63,27 +63,27 @@ public class Cliente {
         this.cep = cep;
     }
 
-    public int getNumero() {
+    public long getNumero() {
         return numero;
     }
 
-    public void setNumero(int numero) {
+    public void setNumero(long numero) {
         this.numero = numero;
     }
 
-    public int getNumero_telefone_fixo() {
+    public String getNumero_telefone_fixo() {
         return numero_telefone_fixo;
     }
 
-    public void setNumero_telefone_fixo(int numero_telefone_fixo) {
+    public void setNumero_telefone_fixo(String numero_telefone_fixo) {
         this.numero_telefone_fixo = numero_telefone_fixo;
     }
 
-    public int getNumero_telefone_celular() {
+    public String getNumero_telefone_celular() {
         return numero_telefone_celular;
     }
 
-    public void setNumero_telefone_celular(int numero_telefone_celular) {
+    public void setNumero_telefone_celular(String numero_telefone_celular) {
         this.numero_telefone_celular = numero_telefone_celular;
     }
 
