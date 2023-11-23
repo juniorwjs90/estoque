@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<meta charset="UTF-8">
+<html>
+<head>
+    <title>Inserir Produto</title>
+    <!-- Inclua os estilos do Bootstrap -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container mt-5">
+        <h2>Lista de Produtos</h2>
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>Código</th>
+                    <th>Nome</th>
+                    <th>Valor</th>
+                    <th>Tipo de unidade</th>
+                    <th>Quantidade</th>
+                </tr>
+            </thead>
+            <tbody id="produtoList">
+            </tbody>
+        </table>
+        <a href="home_verificar.html" class="btn btn-primary">Voltar</a>
+    </div>
+
+    <!-- Inclua o jQuery (ou outra biblioteca AJAX) -->
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+
+    <script>
+        // Função para carregar a lista de unidades de medida
+        function carregarProdutos() {
+            $.get("http://localhost:8080/produto", function(data) {
+                $("#produtoList").empty();
+                    data.forEach(function(produto) {
+                        $("#produtoList").append(`
+                            <tr>
+                                <td>${produto.codigo}</td>
+                                <td>${produto.nome}</td>
+                                <td>${produto.valor}</td>
+                                <td>${produto.tipo_unidade}</td>
+                                <td>${produto.quantidade}</td>
+                            </tr>
+                       `);
+                });
+            });
+        }
+      
+        // Carregando a lista de produtos quando a página é carregada
+        $(document).ready(function() {
+            carregarProdutos();
+            });
+    </script>
+</body>
+</html>

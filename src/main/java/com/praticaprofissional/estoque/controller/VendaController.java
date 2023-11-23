@@ -17,6 +17,7 @@ public class VendaController {
     private final VendaService service;
 
     @CrossOrigin(origins = "*")
+    @PostMapping
     public Venda salvar(@RequestBody Venda addVenda){
         return service.adicionarVenda(addVenda);
     }

@@ -17,6 +17,7 @@ public class ClienteController {
     private final ClienteService service;
 
     @CrossOrigin(origins = "*")
+    @PostMapping
     public Cliente salvar(@RequestBody Cliente addCliente){
        return service.adicionarCliente(addCliente);
     }
