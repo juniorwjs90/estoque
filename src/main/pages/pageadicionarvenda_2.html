@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="https://cdn.rawgit.com/RobinHerbots/Inputmask/5.x/dist/jquery.inputmask.min.js"></script> 
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
+  <title>Formulário de Venda</title>
+  <style>
+    body {
+      background-color: #f8f9fa;
+    }
+    .container {
+      margin-top: 50px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2 class="text-left mb-4">Registrar Venda</h2>
+    
+    <!-- Botão para carregar lista de clientes -->
+    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#clientesModal">
+      Selecionar Cliente
+    </button>
+
+    <form id="vendaForm">
+      <!-- Dados do cliente -->
+      <div class="mb-3">
+        <label for="cpf" class="form-label">CPF:</label>
+        <input type="text" class="form-control" id="cpf" name="cpf" required>
+      </div>
+      <div class="mb-3">
+        <label for="nome_cliente" class="form-label">Nome do Cliente:</label>
+        <input type="text" class="form-control" id="nome_cliente" name="nome_cliente" required>
+      </div>
+      <div class="mb-3">
+        <label for="email" class="form-label">E-mail:</label>
+        <input type="email" class="form-control" id="email" name="email" required>
+      </div>
+      <div class="mb-3">
+        <label for="cep" class="form-label">CEP:</label>
+        <input type="text" class="form-control" id="cep" name="cep" required>
+      </div>
+      <div class="mb-3">
+        <label for="numero" class="form-label">Número:</label>
+        <input type="number" class="form-control" id="numero" name="numero" required>
+      </div>
+      <div class="mb-3">
+        <label for="numero_telefone_fixo" class="form-label">Telefone Fixo:</label>
+        <input type="text" class="form-control" id="numero_telefone_fixo" name="numero_telefone_fixo" required>
+      </div>
+      <div class="mb-3">
+        <label for="numero_telefone_celular" class="form-label">Telefone Celular:</label>
+        <input type="text" class="form-control" id="numero_telefone_celular" name="numero_telefone_celular" required>
+      </div>
+      <div class="mb-3">
+        <label for="endereco" class="form-label">Endereço:</label>
+        <input type="text" class="form-control" id="endereco" name="endereco" required>
+      </div>
+      <div class="mb-3">
+        <label for="bairro" class="form-label">Bairro:</label>
+        <input type="text" class="form-control" id="bairro" name="bairro" required>
+      </div>
+      <div class="mb-3">
+        <label for="estado" class="form-label">Estado:</label>
+        <input type="text" class="form-control" id="estado" name="estado" required>
+      </div>
+      <div class="mb-3">
+        <label for="municipio" class="form-label">Município:</label>
+        <input type="text" class="form-control" id="municipio" name="municipio" required>
+      </div>
+      <div class="mb-3">
+        <label for="complemento" class="form-label">Complemento:</label>
+        <input type="text" class="form-control" id="complemento" name="complemento">
+      </div>
+
+      <!-- Dados do produto -->
+      <div class="mb-3">
+        <label for="codigo_produto" class="form-label">Código do Produto:</label>
+        <input type="number" class="form-control" id="codigo_produto" name="codigo_produto" required>
+      </div>
+      <div class="mb-3">
+        <label for="nome_produto" class="form-label">Nome do Produto:</label>
+        <input type="text" class="form-control" id="nome_produto" name="nome_produto" required>
+      </div>
+      <div class="mb-3">
+        <label for="valor_produto" class="form-label">Valor do Produto:</label>
+        <input type="text" class="form-control" id="valor_produto" name="valor_produto" required>
+      </div>
+      <div class="mb-3">
+        <label for="tipo_unidade" class="form-label">Tipo de Unidade:</label>
+        <input type="text" class="form-control" id="tipo_unidade" name="tipo_unidade" required>
+      </div>
+      <div class="mb-3">
+        <label for="quantidade_produto" class="form-label">Quantidade do Produto:</label>
+        <input type="number" class="form-control" id="quantidade_produto" name="quantidade_produto" required>
+      </div>
+
+      <!-- Dados do pagamento -->
+      <div class="mb-3">
+        <label for="especie" class="form-label">Pagamento em Espécie: *</label>
+        <input type="text" class="form-control" id="especie" name="especie" required>
+      </div>
+      <div class="mb-3">
+        <label for="cartao" class="form-label">Pagamento em Cartão: *</label>
+        <input type="text" class="form-control" id="cartao" name="cartao" required>
+      </div>
+      <div class="mb-3">
+        <label for="pix" class="form-label">Pagamento PIX:</label>
+        <input type="text" class="form-control" id="pix" name="pix">
+      </div>
+      <div class="mb-3">
+        <label for="desconto" class="form-label">Desconto:</label>
+        <input type="text" class="form-control" id="desconto" name="desconto">
+      </div>
+
+      <button type="button" class="btn btn-primary" onclick="salvarVenda()">Salvar</button>
+      <a href="home_verificar.html" class="btn btn-primary">Voltar</a>
+      <div id="mensagem" class="mt-3"></div>
+    </form>
+  </div>
+
+  <!-- Modal para listar clientes -->
+  <div class="modal fade" id="clientesModal" tabindex="-1" aria-labelledby="clientesModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="clientesModalLabel">Lista de Clientes</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <!-- Tabela para exibir a lista de clientes -->
+          <table class="table">
+            <thead>
+              <tr>
+                <th>CPF</th>
+                <th>Nome</th>
+                <th>E-mail</th>
+                <!-- Adicione mais colunas conforme necessário -->
+              </tr>
+            </thead>
+            <tbody id="listaClientes">
+              <!-- Os clientes serão carregados dinamicamente aqui -->
+            </tbody>
+          </table>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Função para carregar a lista de clientes
+    function carregarClientes() {
+      $.get("http://localhost:8080/cliente", function(data) {
+        $("#listaClientes").empty();
+        data.forEach(function(cliente) {
+          $("#listaClientes").append(`
+            <tr>
+              <td>${cliente.cpf}</td>
+              <td>${cliente.nome}</td>
+              <td>${cliente.email}</td>
+              <!-- Adicione mais colunas conforme necessário -->
+              <td><button type="button" class="btn btn-primary" onclick="selecionarCliente('${cliente.cpf}', '${cliente.nome}', '${cliente.email}')">Selecionar</button></td>
+            </tr>
+          `);
+        });
+      });
+    }
+
+    // Atualizar a lista de clientes quando o modal for exibido
+    $('#clientesModal').on('show.bs.modal', function (event) {
+      carregarClientes();
+    });
+
+    // Selecionar um cliente e preencher os campos na tela de venda
+    function selecionarCliente(cpf, nome, email) {
+      // Preencher os campos do cliente na tela de venda
+      document.getElementById('cpf').value = cpf;
+      document.getElementById('nome_cliente').value = nome;
+      document.getElementById('email').value = email;
+      // Fechar o modal após a seleção
+      $('#clientesModal').modal('hide');
+    }
+
+    // Máscaras para os campos
+    $(document).ready(function() {
+      $('#cpf').inputmask('999.999.999-99');
+      $('#cep').inputmask('99999-999');
+      $('#numero_telefone_fixo').inputmask('(99) 9999-9999');
+      $('#numero_telefone_celular').inputmask('(99) 99999-9999');
+      $('#valor_produto').inputmask('R$ 999.999,99', { numericInput: true });
+      $('#especie').inputmask('R$ 999.999,99', { numericInput: true });
+      $('#cartao').inputmask('R$ 999.999,99', { numericInput: true });
+      $('#pix').inputmask('R$ 999.999,99', { numericInput: true });
+      $('#desconto').inputmask('R$ 999.999,99', { numericInput: true });
+
+
+    });
+
+function salvarVenda() {
+      // Capturar os valores do formulário
+      var cpf = document.getElementById('cpf').value;
+      var nome_cliente = document.getElementById('nome_cliente').value;
+      var email = document.getElementById('email').value;
+      var cep = document.getElementById('cep').value;
+      var numero = document.getElementById('numero').value;
+      var numero_telefone_fixo = document.getElementById('numero_telefone_fixo').value;
+      var numero_telefone_celular = document.getElementById('numero_telefone_celular').value;
+      var endereco = document.getElementById('endereco').value;
+      var bairro = document.getElementById('bairro').value;
+      var estado = document.getElementById('estado').value;
+      var municipio = document.getElementById('municipio').value;
+      var complemento = document.getElementById('complemento').value;
+
+      var codigo_produto = document.getElementById('codigo_produto').value;
+      var nome_produto = document.getElementById('nome_produto').value;
+      var valor_produto = document.getElementById('valor_produto').value;
+      var tipo_unidade = document.getElementById('tipo_unidade').value;
+      var quantidade_produto = document.getElementById('quantidade_produto').value;
+
+      var especie = document.getElementById('especie').value;
+      var cartao = document.getElementById('cartao').value;
+      var pix = document.getElementById('pix').value;
+      var desconto = document.getElementById('desconto').value;
+
+      // Criar objeto Venda com os valores do formulário
+      var venda = {
+        cpf: cpf,
+        nome_cliente: nome_cliente,
+        email: email,
+        cep: cep,
+        numero: numero,
+        numero_telefone_fixo: numero_telefone_fixo,
+        numero_telefone_celular: numero_telefone_celular,
+        endereco: endereco,
+        bairro: bairro,
+        estado: estado,
+        municipio: municipio,
+        complemento: complemento,
+        codigo_produto: codigo_produto,
+        nome_produto: nome_produto,
+        valor_produto: valor_produto,
+        tipo_unidade: tipo_unidade,
+        quantidade_produto: quantidade_produto,
+        especie: especie,
+        cartao: cartao,
+        pix: pix,
+        desconto: desconto
+      };
+
+      // Enviar objeto Venda para o método salvar no servidor
+      $.ajax({
+        type: 'POST',
+        url: 'http://localhost:8080/venda',
+        contentType: 'application/json',
+        data: JSON.stringify(venda),
+        success: function(data) {
+          exibirMensagem('success', 'Venda registrada com sucesso!');
+          console.log('Venda registrada com sucesso:', data);
+          // Adicionar lógica adicional conforme necessário
+        },
+        error: function(error) {
+          exibirMensagem('danger', 'Erro ao registrar venda. Por favor, tente novamente.');
+          console.error('Erro ao registrar venda:', error);
+          // Adicionar lógica adicional para tratamento de erro
+        }
+      });
+    }
+
+    function exibirMensagem(tipo, texto) {
+      var mensagemDiv = document.getElementById('mensagem');
+      mensagemDiv.innerHTML = `<div class="alert alert-${tipo}" role="alert">${texto}</div>`;
+    }
+  </script>
+</body>
+</html>

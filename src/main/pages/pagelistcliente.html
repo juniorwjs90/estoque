@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <title>Lista de Clientes</title>
+    <style>
+    body {
+      background-color: #f8f9fa;
+    }
+    .container {
+      margin-top: 50px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container mt-5">
+    <h2>Lista de Clientes</h2>
+    <table class="table table-bordered">
+      <thead>
+        <tr>
+          <th>CPF</th>
+          <th>Nome</th>
+          <th>Email</th>
+          <th>CEP</th>
+          <th>Número</th>
+          <th>Telefone Fixo</th>
+          <th>Telefone Celular</th>
+          <th>Endereço</th>
+          <th>Bairro</th>
+          <th>Estado</th>
+          <th>Município</th>
+          <th>Complemento</th>
+        </tr>
+      </thead>
+      <tbody id="clienteList">
+      </tbody>
+    </table>
+    <a href="home_verificar.html" class="btn btn-primary">Voltar</a>
+  </div>
+
+  <!-- Inclua o jQuery (ou outra biblioteca AJAX) -->
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+  <script>
+    // Função para carregar a lista de clientes
+    function carregarClientes() {
+      $.get("http://localhost:8080/cliente", function(data) {
+        $("#clienteList").empty();
+        data.forEach(function(cliente) {
+          $("#clienteList").append(`
+            <tr>
+              <td>${cliente.cpf}</td>
+              <td>${cliente.nome}</td>
+              <td>${cliente.email}</td>
+              <td>${cliente.cep}</td>
+              <td>${cliente.numero}</td>
+              <td>${cliente.numero_telefone_fixo}</td>
+              <td>${cliente.numero_telefone_celular}</td>
+              <td>${cliente.endereco}</td>
+              <td>${cliente.bairro}</td>
+              <td>${cliente.estado}</td>
+              <td>${cliente.municipio}</td>
+              <td>${cliente.complemento}</td>
+            </tr>
+          `);
+        });
+      });
+    }
+
+    // Carregando a lista de clientes quando a página é carregada
+    $(document).ready(function() {
+      carregarClientes();
+    });
+  </script>
+</body>
+</html>

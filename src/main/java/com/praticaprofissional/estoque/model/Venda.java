@@ -10,13 +10,13 @@ public class Venda {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-    private int cpf;
+    private String cpf;
     private String nome_cliente;
     private String email;
     private String cep;
-    private int numero;
-    private int numero_telefone_fixo;
-    private int numero_telefone_celular;
+    private String numero;
+    private String numero_telefone_fixo;
+    private String numero_telefone_celular;
     private String endereco;
     private String bairro;
     private String estado;
@@ -25,14 +25,14 @@ public class Venda {
     //dados do produto
     private long codigo_produto;
     private String nome_produto;
-    private float valor_produto;
+    private String valor_produto;
     private String tipo_unidade;
     private long quantidade_produto;
     //dados do pagamento
-    private long especie;
-    private long cartao;
-    private long pix;
-    private long desconto;
+    private String especie;
+    private String cartao;
+    private String pix;
+    private String desconto;
 
     public long getId() {
         return id;
@@ -42,11 +42,11 @@ public class Venda {
         this.id = id;
     }
 
-    public int getCpf() {
+    public String getCpf() {
         return cpf;
     }
 
-    public void setCpf(int cpf) {
+    public void setCpf(String cpf) {
         this.cpf = cpf;
     }
 
@@ -74,27 +74,27 @@ public class Venda {
         this.cep = cep;
     }
 
-    public int getNumero() {
+    public String getNumero() {
         return numero;
     }
 
-    public void setNumero(int numero) {
+    public void setNumero(String numero) {
         this.numero = numero;
     }
 
-    public int getNumero_telefone_fixo() {
+    public String getNumero_telefone_fixo() {
         return numero_telefone_fixo;
     }
 
-    public void setNumero_telefone_fixo(int numero_telefone_fixo) {
+    public void setNumero_telefone_fixo(String numero_telefone_fixo) {
         this.numero_telefone_fixo = numero_telefone_fixo;
     }
 
-    public int getNumero_telefone_celular() {
+    public String getNumero_telefone_celular() {
         return numero_telefone_celular;
     }
 
-    public void setNumero_telefone_celular(int numero_telefone_celular) {
+    public void setNumero_telefone_celular(String numero_telefone_celular) {
         this.numero_telefone_celular = numero_telefone_celular;
     }
 
@@ -154,11 +154,11 @@ public class Venda {
         this.nome_produto = nome_produto;
     }
 
-    public float getValor_produto() {
+    public String getValor_produto() {
         return valor_produto;
     }
 
-    public void setValor_produto(float valor_produto) {
+    public void setValor_produto(String valor_produto) {
         this.valor_produto = valor_produto;
     }
 
@@ -178,35 +178,35 @@ public class Venda {
         this.quantidade_produto = quantidade_produto;
     }
 
-    public long getEspecie() {
+    public String getEspecie() {
         return especie;
     }
 
-    public void setEspecie(long especie) {
+    public void setEspecie(String especie) {
         this.especie = especie;
     }
 
-    public long getCartao() {
+    public String getCartao() {
         return cartao;
     }
 
-    public void setCartao(long cartao) {
+    public void setCartao(String cartao) {
         this.cartao = cartao;
     }
 
-    public long getPix() {
+    public String getPix() {
         return pix;
     }
 
-    public void setPix(long pix) {
+    public void setPix(String pix) {
         this.pix = pix;
     }
 
-    public long getDesconto() {
+    public String getDesconto() {
         return desconto;
     }
 
-    public void setDesconto(long desconto) {
+    public void setDesconto(String desconto) {
         this.desconto = desconto;
     }
 }

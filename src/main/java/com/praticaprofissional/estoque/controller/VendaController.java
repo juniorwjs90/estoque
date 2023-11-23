@@ -3,7 +3,6 @@ package com.praticaprofissional.estoque.controller;
 import com.praticaprofissional.estoque.model.Venda;
 import com.praticaprofissional.estoque.service.VendaService;
 import lombok.AllArgsConstructor;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
