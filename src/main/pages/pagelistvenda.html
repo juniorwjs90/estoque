@@ -20,7 +20,7 @@
           <th>Nome do Cliente</th>
           <th>E-mail</th>
           <th>Produto</th>
-          <th>Valor do Produto</th>
+    
         </tr>
       </thead>
       <tbody id="vendaList">
@@ -49,13 +49,13 @@
               <td>${venda.nome_cliente}</td>
               <td>${venda.email}</td>
               <td>${venda.nome_produto}</td>
-              <td>${valorFormatado}</td>
+              
             </tr>
           `);
         });
       });
     }
-
+    //<td>${valorFormatado}</td>
     // Carregando a lista de vendas quando a página é carregada
     $(document).ready(function() {
       carregarVendas();

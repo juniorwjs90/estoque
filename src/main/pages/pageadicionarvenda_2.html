@@ -167,7 +167,7 @@
               <td>${cliente.nome}</td>
               <td>${cliente.email}</td>
               <!-- Adicione mais colunas conforme necessário -->
-              <td><button type="button" class="btn btn-primary" onclick="selecionarCliente('${cliente.cpf}', '${cliente.nome}', '${cliente.email}')">Selecionar</button></td>
+              <td><button type="button" class="btn btn-primary" onclick="selecionarCliente('${cliente.cpf}', '${cliente.nome}', '${cliente.email}', '${cliente.cep}', '${cliente.numero}', '${cliente.numero_telefone_fixo}', '${cliente.numero_telefone_celular}', '${cliente.endereco}', '${cliente.bairro}', '${cliente.estado}', '${cliente.municipio}', '${cliente.complemento}')">Selecionar</button></td>
             </tr>
           `);
         });
@@ -180,11 +180,23 @@
     });
 
     // Selecionar um cliente e preencher os campos na tela de venda
-    function selecionarCliente(cpf, nome, email) {
-      // Preencher os campos do cliente na tela de venda
+    function selecionarCliente(cpf, nome, email, cep, numero, numero_telefone_fixo, numero_telefone_celular, endereco, bairro, estado, municipio, complemento) {
+      // Preencher os campos do cliente na tela de salvarVenda
       document.getElementById('cpf').value = cpf;
       document.getElementById('nome_cliente').value = nome;
       document.getElementById('email').value = email;
+      document.getElementById('cep').value = cep;
+      document.getElementById('numero').value = numero;
+      document.getElementById('numero_telefone_fixo').value = numero_telefone_fixo;
+      document.getElementById('numero_telefone_celular').value = numero_telefone_celular;
+      document.getElementById('endereco').value = endereco;
+      document.getElementById('bairro').value = bairro;
+      document.getElementById('estado').value = estado;
+      document.getElementById('municipio').value = municipio;
+      document.getElementById('complemento').value = complemento;
+
+
+
       // Fechar o modal após a seleção
       $('#clientesModal').modal('hide');
     }
